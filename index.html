@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhishek Kumar | Front-End Developer</title>
+
+    <style>
+        :root {
+            --bg-color: #f4f4f4;
+            --text-color: #333;
+            --header-bg: #222;
+            --box-bg: #fff;
+            --btn-bg: #444;
+        }
+
+        body.dark {
+            --bg-color: #121212;
+            --text-color: #e6e6e6;
+            --header-bg: #1f1f1f;
+            --box-bg: #1e1e1e;
+            --btn-bg: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        header {
+            background: var(--header-bg);
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 24px;
+        }
+
+        .theme-btn {
+            padding: 8px 15px;
+            background: #007bff;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .nav-links li {
+            display: inline;
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .project {
+            background: var(--box-bg);
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            border-radius: 10px;
+            max-width: 600px;
+        }
+
+        /* Calculator Design */
+        .calculator {
+            width: 260px;
+            margin: 20px auto;
+            background: var(--header-bg);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        #display {
+            width: 100%;
+            height: 55px;
+            margin-bottom: 10px;
+            font-size: 22px;
+            text-align: right;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .buttons button {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            border: none;
+            background: var(--btn-bg);
+            color: #fff;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .buttons button:hover {
+            background: #666;
+        }
+
+        .zero {
+            width: 108px;
+        }
+
+        .clock {
+            font-size: 40px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <h1 class="logo">Abhishek Kumar</h1>
+
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <button class="theme-btn" onclick="toggleTheme()">Toggle Mode</button>
+    </nav>
+</header>
+
+<section id="home">
+    <h2>Hello, I'm <span style="color:#007bff;">Abhishek Kumar</span></h2>
+    <p>A passionate Front-End Developer</p>
+</section>
+
+<section id="about">
+    <h2>About Me</h2>
+    <p>I am Abhishek Kumar, a student and front-end developer who builds modern and responsive websites.</p>
+</section>
+
+<section id="skills" class="skills">
+    <h2>My Skills</h2>
+    <p>HTML • CSS • JavaScript • Responsive Web Design • Git & GitHub</p>
+</section>
+
+<section id="projects">
+    <h2>My Projects</h2>
+
+    <!-- Digital Clock -->
+    <div class="project">
+        <h3>Digital Clock</h3>
+        <p>A real-time working clock.</p>
+        <div class="clock" id="digitalClock">00:00:00</div>
+    </div>
+
+    <!-- Calculator -->
+    <div class="project">
+        <h3>Calculator</h3>
+        <p>Fully working calculator using JavaScript.</p>
+
+        <div class="calculator">
+            <input type="text" id="display" disabled>
+
+            <div class="buttons">
+                <button onclick="clearDisplay()">C</button>
+                <button onclick="deleteChar()">DEL</button>
+                <button onclick="appendValue('/')">/</button>
+                <button onclick="appendValue('*')">*</button>
+
+                <button onclick="appendValue('7')">7</button>
+                <button onclick="appendValue('8')">8</button>
+                <button onclick="appendValue('9')">9</button>
+                <button onclick="appendValue('-')">-</button>
+
+                <button onclick="appendValue('4')">4</button>
+                <button onclick="appendValue('5')">5</button>
+                <button onclick="appendValue('6')">6</button>
+                <button onclick="appendValue('+')">+</button>
+
+                <button onclick="appendValue('1')">1</button>
+                <button onclick="appendValue('2')">2</button>
+                <button onclick="appendValue('3')">3</button>
+                <button onclick="appendValue('%')">%</button>
+
+                <button onclick="appendValue('0')" class="zero">0</button>
+                <button onclick="appendValue('.')">.</button>
+                <button onclick="calculate()">=</button>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section id="contact">
+    <h2>Contact Me</h2>
+    <p>Email: yourmail@example.com</p>
+    <p>Phone: 123456789</p>
+</section>
+
+<script>
+
+    /* ---------- DARK / LIGHT MODE ---------- */
+    function toggleTheme() {
+        document.body.classList.toggle("dark");
+    }
+
+    /* ---------- FIXED CALCULATOR ---------- */
+    function appendValue(value) {
+        const display = document.getElementById("display");
+
+        // Prevent duplicate operators
+        const lastChar = display.value.slice(-1);
+        const operators = ["+", "-", "*", "/", "%"];
+
+        if (operators.includes(value) && operators.includes(lastChar)) {
+            return;
+        }
+
+        display.value += value;
+    }
+
+    function clearDisplay() {
+        document.getElementById("display").value = "";
+    }
+
+    function deleteChar() {
+        let display = document.getElementById("display");
+        display.value = display.value.slice(0, -1);
+    }
+
+    function calculate() {
+        const display = document.getElementById("display");
+
+        try {
+            // Safe expression (replaces % with /100)
+            const expression = display.value.replace(/%/g, "/100");
+            display.value = eval(expression);
+        } catch {
+            display.value = "Error";
+        }
+    }
+
+    /* ---------- DIGITAL CLOCK ---------- */
+    function updateClock() {
+        let now = new Date();
+        let h = String(now.getHours()).padStart(2, '0');
+        let m = String(now.getMinutes()).padStart(2, '0');
+        let s = String(now.getSeconds()).padStart(2, '0');
+
+        document.getElementById("digitalClock").textContent = `${h}:${m}:${s}`;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+</script>
+
+</body>
+</html>
